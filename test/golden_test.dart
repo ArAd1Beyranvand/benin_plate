@@ -26,11 +26,11 @@ void main() {
   /// category id -> (spec, theme, space-separated sample value)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
-        'private': (BeninPlates.private, BeninThemes.private, 'A E 8 8 8 8'),
+        'private': (BeninPlates.private, BeninThemes.private, 'AE 8888'),
         'commercial': (
           BeninPlates.commercial,
           BeninThemes.commercial,
-          'A A 8 8 5 3',
+          'AA 8853',
         ),
       };
 
@@ -63,6 +63,11 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      // The map decal decodes off the test clock; give it real time.
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 300)),
+      );
+      await tester.pump();
       await expectLater(
         find.byType(PlateView),
         matchesGoldenFile('goldens/bj_${c.key}.png'),

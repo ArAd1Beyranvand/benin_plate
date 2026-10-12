@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -66,22 +68,20 @@ abstract final class BeninPlates {
   );
 
   static PlateSpec _spec(String id) {
-    final List<PlateSlot> series = plateRegister(
-      alphabet: BeninAlphabets.letters,
-      count: 2,
-      left: _Layout.seriesCx - _Layout.seriesPitch / 2,
-      top: _Layout.cy - _Layout.box / 2,
-      width: _Layout.seriesPitch,
-      height: _Layout.box,
-    );
-    final List<PlateSlot> number = plateRegister(
-      alphabet: BeninAlphabets.digits,
-      count: 4,
-      left: _Layout.numberCx - _Layout.numberPitch / 2,
-      top: _Layout.cy - _Layout.box / 2,
-      width: _Layout.numberPitch,
-      height: _Layout.box,
-    );
+    // One field per group over its cells; the spacing brings the font's
+    // ~0.6 em advance (glyph at 0.72 of the box) up to the measured pitch.
+    PlateSlot field(PlateAlphabet alphabet, int count, double cx, double p) =>
+        PlateSlot(
+          alphabet: alphabet,
+          box: PlateBox(
+            cx - p / 2,
+            _Layout.cy - _Layout.box / 2,
+            count * p,
+            _Layout.box,
+          ),
+          length: count,
+          spacing: max(0, p - 0.6 * 0.72 * _Layout.box),
+        );
     return PlateSpec(
       id: id,
       country: BeninCountry.benin,
@@ -89,7 +89,10 @@ abstract final class BeninPlates {
       canvasHeight: _Layout.height,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
       noPanel: true,
-      slots: <PlateSlot>[...series, ...number],
+      slots: <PlateSlot>[
+        field(BeninAlphabets.letters, 2, _Layout.seriesCx, _Layout.seriesPitch),
+        field(BeninAlphabets.digits, 4, _Layout.numberCx, _Layout.numberPitch),
+      ],
       bands: const <PlateBand>[
         PlateBand(
           box: _Layout.stickerFrame,
@@ -109,8 +112,8 @@ abstract final class BeninPlates {
       ],
       decals: const <PlateDecal>[_map],
       textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0, 1], key: 'series'),
-        PlateTextGroup(<int>[2, 3, 4, 5], key: 'number'),
+        PlateTextGroup(<int>[0], key: 'series'),
+        PlateTextGroup(<int>[1], key: 'number'),
       ],
     );
   }
