@@ -49,7 +49,7 @@ abstract final class _Layout {
 ///
 /// Not implemented: the two-line and motorcycle variants, and the state,
 /// government and diplomatic series, which the article describes but does not
-/// picture. The article names no Israel-specific value.
+/// picture.
 abstract final class BeninPlates {
   static final PlateSpec private = _spec('bj.private');
 

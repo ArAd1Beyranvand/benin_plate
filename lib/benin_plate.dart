@@ -1,6 +1,5 @@
-/// Benin's licence plates for the `plate_core` library.
-///
-/// private (black on white) and commercial (black on orange) plates, with their themes, alphabets and an advisory validator.
+/// Benin's private and commercial plates for `plate_core`, with an advisory
+/// validator.
 library;
 
 export 'src/benin_colors.dart';
