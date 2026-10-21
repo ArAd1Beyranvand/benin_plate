@@ -5,12 +5,14 @@ import 'package:plate_core/plate_core.dart';
 class BeninValidator extends GatedPlateValidator {
   const BeninValidator();
 
+  static final RegExp _series = RegExp(r'^[A-Z]{2}$');
+
   @override
   String get gateGroup => 'number';
 
   @override
   PlateValidation judge(PlateEntry entry) {
-    if (!RegExp(r'^[A-Z]{2}$').hasMatch(entry.group('series'))) {
+    if (!_series.hasMatch(entry.group('series'))) {
       return PlateValidation.invalid('The series is 2 letters.');
     }
     if (!isDigitsOfLength(entry.group('number'), 4)) {
