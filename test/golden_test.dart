@@ -27,21 +27,13 @@ void main() {
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
         'private': (BeninPlates.private, BeninThemes.private, 'AE 8888'),
-        'commercial': (
-          BeninPlates.commercial,
-          BeninThemes.commercial,
-          'AA 8853',
-        ),
+        'commercial': (BeninPlates.commercial, BeninThemes.commercial, 'AA 8853'),
       };
 
-  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c
-      in cases.entries) {
+  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c in cases.entries) {
     testWidgets(c.key, (tester) async {
       final (PlateSpec spec, PlateTheme theme, String values) = c.value;
-      final PlateController controller = PlateController.fromValues(
-        spec,
-        values.split(' '),
-      );
+      final PlateController controller = PlateController.fromValues(spec, values.split(' '));
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -64,14 +56,9 @@ void main() {
       );
       await tester.pumpAndSettle();
       // The map decal decodes off the test clock; give it real time.
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 300)),
-      );
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 300)));
       await tester.pump();
-      await expectLater(
-        find.byType(PlateView),
-        matchesGoldenFile('goldens/bj_${c.key}.png'),
-      );
+      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/bj_${c.key}.png'));
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });

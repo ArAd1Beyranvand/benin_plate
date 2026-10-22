@@ -60,28 +60,19 @@ abstract final class BeninPlates {
   /// https://commons.wikimedia.org/wiki/File:Flag_map_of_Benin.svg
   /// (`assets/icons/benin_flag_map.svg`, rasterised to the PNG).
   static const PlateDecal _map = PlateDecal(
-    image: AssetImage(
-      'assets/icons/benin_flag_map.png',
-      package: 'benin_plate',
-    ),
+    image: AssetImage('assets/icons/benin_flag_map.png', package: 'benin_plate'),
     box: _Layout.map,
   );
 
   static PlateSpec _spec(String id) {
     // One field per group over its cells; the spacing brings the font's
     // ~0.6 em advance (glyph at 0.72 of the box) up to the measured pitch.
-    PlateSlot field(PlateAlphabet alphabet, int count, double cx, double p) =>
-        PlateSlot(
-          alphabet: alphabet,
-          box: PlateBox(
-            cx - p / 2,
-            _Layout.cy - _Layout.box / 2,
-            count * p,
-            _Layout.box,
-          ),
-          length: count,
-          spacing: max(0, p - 0.6 * 0.72 * _Layout.box),
-        );
+    PlateSlot field(PlateAlphabet alphabet, int count, double cx, double p) => PlateSlot(
+      alphabet: alphabet,
+      box: PlateBox(cx - p / 2, _Layout.cy - _Layout.box / 2, count * p, _Layout.box),
+      length: count,
+      spacing: max(0, p - 0.6 * 0.72 * _Layout.box),
+    );
     return PlateSpec(
       id: id,
       country: BeninCountry.benin,
@@ -100,11 +91,7 @@ abstract final class BeninPlates {
           topCornerRadius: _Layout.stickerRadius,
           bottomCornerRadius: _Layout.stickerRadius,
         ),
-        PlateBand(
-          box: _Layout.stickerPanel,
-          color: Color(0xFF7D0000),
-          topCornerRadius: 1.5,
-        ),
+        PlateBand(box: _Layout.stickerPanel, color: Color(0xFF7D0000), topCornerRadius: 1.5),
         PlateBand(box: _Layout.stickerStrip, color: Color(0xFFF4F4F4)),
       ],
       labels: const <PlateLabel>[
