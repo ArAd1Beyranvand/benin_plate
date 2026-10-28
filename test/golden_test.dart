@@ -26,8 +26,8 @@ void main() {
   /// category id -> (spec, theme, space-separated sample value)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
-        'private': (BeninPlates.private, BeninThemes.private, 'AE 8888'),
-        'commercial': (BeninPlates.commercial, BeninThemes.commercial, 'AA 8853'),
+        'private': (BeninPlates.standard, BeninThemes.private, 'AE 8888'),
+        'commercial': (BeninPlates.standard, BeninThemes.commercial, 'AA 8853'),
       };
 
   for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c in cases.entries) {

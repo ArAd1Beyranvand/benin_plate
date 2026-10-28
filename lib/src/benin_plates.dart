@@ -44,18 +44,16 @@ abstract final class _Layout {
 
 /// Benin's current plates: `AB 1234` in one row, a sticker, the national
 /// map and "RB" at the right. Private is black on white, commercial black on
-/// orange; the shape is the same, so one builder serves both. Colour is the
-/// theme's: pair each with the [BeninThemes] member of the same name.
+/// orange; the shape is the same, so one spec serves both. Colour is the
+/// theme's: [BeninThemes.private] or [BeninThemes.commercial].
 ///
 /// Not implemented: the two-line and motorcycle variants, and the state,
 /// government and diplomatic series, which the article describes but does not
 /// picture.
 abstract final class BeninPlates {
-  static final PlateSpec private = _spec('bj.private');
+  static final PlateSpec standard = _spec('bj.standard');
 
-  static final PlateSpec commercial = _spec('bj.commercial');
-
-  static List<PlateSpec> get all => <PlateSpec>[private, commercial];
+  static List<PlateSpec> get all => <PlateSpec>[standard];
 
   /// https://commons.wikimedia.org/wiki/File:Flag_map_of_Benin.svg
   /// (`assets/icons/benin_flag_map.svg`, rasterised to the PNG).

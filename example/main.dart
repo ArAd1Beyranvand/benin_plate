@@ -16,7 +16,7 @@ class ExampleApp extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: PlateCanvas(
-              spec: BeninPlates.private,
+              spec: BeninPlates.standard,
               theme: BeninThemes.private,
               onChooseCharacter: (alphabet) async => null,
             ),
