@@ -2,6 +2,9 @@
 /// validator.
 library;
 
+// TODO(py): [D5] one module `plates.countries.benin`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/benin`; tree-shakable.
+// TODO(kt): [D5] package `countries.benin` in the countries module.
 export 'package:plate_alphabet/plate_alphabet.dart' show BeninAlphabets;
 
 export 'src/benin_colors.dart';

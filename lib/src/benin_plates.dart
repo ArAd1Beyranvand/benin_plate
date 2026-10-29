@@ -58,6 +58,9 @@ abstract final class BeninPlates {
   /// https://commons.wikimedia.org/wiki/File:Flag_map_of_Benin.svg
   /// (`assets/icons/benin_flag_map.svg`, rasterised to the PNG).
   static const PlateDecal _map = PlateDecal(
+    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage(
       'assets/icons/benin_flag_map.png',
       package: 'benin_plate',
