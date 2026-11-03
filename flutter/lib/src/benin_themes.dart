@@ -17,7 +17,6 @@ abstract final class BeninThemes {
 PlateTheme _ink(Color field) => PlateTheme.monochrome(
   field: field,
   ink: BeninColors.black,
-  inactive: BeninColors.inactive,
   borderWidthRatio: 0.04,
   plateRadiusRatio: 0.09,
 );

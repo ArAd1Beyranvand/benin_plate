@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -19,9 +17,7 @@ import 'benin_country.dart';
 /// gives ~55, so the characters land near 70% of the reference. The box is
 /// capped at 100 on the 110-unit plate.
 abstract final class _Layout {
-  static const double width = 520, height = 110;
-  static const double box = 100;
-  static const double cy = 54.5;
+  static const double width = 520, height = 110, box = 100, cy = 54.5;
 
   static const double seriesCx = 43.5, seriesPitch = 62.5;
   static const double numberCx = 172, numberPitch = 62.4;
@@ -58,9 +54,6 @@ abstract final class BeninPlates {
   /// https://commons.wikimedia.org/wiki/File:Flag_map_of_Benin.svg
   /// (`assets/icons/benin_flag_map.svg`, rasterised to the PNG).
   static const PlateDecal _map = PlateDecal(
-    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
-    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
-    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage(
       'assets/icons/benin_flag_map.png',
       package: 'benin_plate',
@@ -72,24 +65,19 @@ abstract final class BeninPlates {
     // One field per group over its cells; the spacing brings the font's
     // ~0.6 em advance (glyph at 0.72 of the box) up to the measured pitch.
     PlateSlot field(PlateAlphabet alphabet, int count, double cx, double p) =>
-        PlateSlot(
-          alphabet: alphabet,
-          box: PlateBox(
-            cx - p / 2,
-            _Layout.cy - _Layout.box / 2,
-            count * p,
-            _Layout.box,
-          ),
-          length: count,
-          spacing: max(0, p - 0.6 * 0.72 * _Layout.box),
+        plateRun(
+          alphabet,
+          count,
+          left: cx - p / 2,
+          top: _Layout.cy - _Layout.box / 2,
+          pitch: p,
+          height: _Layout.box,
         );
     return PlateSpec(
       id: id,
       country: BeninCountry.benin,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
-      panel: const PlatePanel(box: PlateBox(0, 0, 0, 0)),
-      noPanel: true,
       slots: <PlateSlot>[
         field(BeninAlphabets.letters, 2, _Layout.seriesCx, _Layout.seriesPitch),
         field(BeninAlphabets.digits, 4, _Layout.numberCx, _Layout.numberPitch),
@@ -112,10 +100,7 @@ abstract final class BeninPlates {
         PlateLabel(text: 'RB', box: _Layout.rb, glyphHeight: _Layout.rbGlyph),
       ],
       decals: const <PlateDecal>[_map],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'series'),
-        PlateTextGroup(<int>[1], key: 'number'),
-      ],
+      textGroups: PlateTextGroup.perSlot(<String>['series', 'number']),
     );
   }
 }

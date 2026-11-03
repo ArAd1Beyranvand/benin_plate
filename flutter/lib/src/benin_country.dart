@@ -7,7 +7,6 @@ import 'benin_colors.dart';
 abstract final class BeninCountry {
   static const PlateCountry benin = PlateCountry(
     code: 'bj',
-    captionLines: <String>[],
     panelColor: BeninColors.white,
     panelTextColor: BeninColors.black,
   );
